@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #0E0E0E;
+  --gray-color: #262525;
+  --gray-light-color: #858585;
+  --gray-hover: #bfbfbf;
+  --orange-color: #F89A2F;
+  --orange-hover: #ffc584;
+  --red-color: #FF5757;
+  --red-hover: #fa8585;
+}
+
+body {
+  background: var(--background);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Buttons */
+.button--orange {
+  background-color: var(--orange-color);
+  padding: 10px;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button--orange:hover {
+  background-color: var(--orange-hover);
+}
+
+.button--notvailable {
+  background-color: #585858;
+  padding: 10px;
+  color: white;
+  display: flex;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.button--gray {
+  background-color: var(--gray-light-color);
+  padding: 10px;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button--gray:hover {
+  background-color: var(--gray-hover);
+}
+
+.button--white {
+  background-color: white;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button--red {
+  background-color: var(--red-color);
+  padding: 10px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button--red:hover {
+  background-color: var(--red-hover);
+}
+
+/* Input / Fields */
+.arounded-gray {
+  background-color: var(--gray-color);
+  padding: 13px;
+  border-radius: 13px;
+  border: 2px solid var(--gray-light-color);
+}
+
+/* Text */
+.text--white {
+  color: white;
+}
+
+.text--gray {
+  color: #979797;
+  font-size: small;
+}
+
+.text--error {
+  color: red;
+}
+
+.text--success {
+  color: rgb(28, 255, 28);
+}
+
+/* Titles */
+.big--title {
+  font-size: 80px;
+  font-weight: bolder;
+  color: white;
+}
+
+.big--title--orange {
+  font-size: 160px;
+  font-weight: bolder;
+  color: var(--orange-color);
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Petits écrans (mobile) */
+@media (max-width: 640px) {
+  .big--title {
+    font-size: 40px;
+  }
+  .big--title--orange {
+    font-size: 80px;
+  }
+
+  .button--orange,
+  .button--gray,
+  .button--red,
+  .button--white,
+  .button--notvailable {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .arounded-gray {
+    padding: 10px;
+  }
+
+  .text--gray {
+    font-size: 12px;
+  }
+}
+
+/* Écrans moyens (tablette) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .big--title {
+    font-size: 60px;
+  }
+  .big--title--orange {
+    font-size: 120px;
+  }
+
+  .button--orange,
+  .button--gray,
+  .button--red,
+  .button--white,
+  .button--notvailable {
+    padding: 9px;
+    font-size: 15px;
+  }
+
+  .arounded-gray {
+    padding: 12px;
+  }
+
+  .text--gray {
+    font-size: 13px;
+  }
+}

@@ -70,12 +70,15 @@ export default function Page() {
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <div className="p-2 button--white text-center sm:text-left">€{product.price}</div>
-            <button
+          {product.isAvailable ? (  <button
               onClick={() => addToCart(product)}
               className="button--orange w-full sm:w-auto"
             >
               Ajouter au panier
-            </button>
+            </button>) : (   <button className="button--notvailable  w-full sm:w-auto" disabled>
+            Ajouter au panier
+          </button>
+        )}
           </div>
         </div>
       </div>

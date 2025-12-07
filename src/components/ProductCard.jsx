@@ -8,7 +8,7 @@ export default function ProductCard({ item, addToCart }) {
       <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60">
         <Image
           src={item.imageUrl}
-          alt={item.name}
+          alt={"image de produit "+item.name}
           width={400}
           height={300}
           className="w-full h-full object-cover rounded-lg"

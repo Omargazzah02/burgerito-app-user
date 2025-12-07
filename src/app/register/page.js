@@ -54,6 +54,7 @@ export default function page() {
         className="flex flex-col gap-6 items-center w-full sm:w-3/4 md:w-1/2 lg:w-2/5"
         onSubmit={handleSubmit}
       >
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
           <input
             className="arounded-gray col-span-1 sm:col-span-2 text-center text-white w-full"

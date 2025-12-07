@@ -19,7 +19,7 @@ export default function MiniCart() {
             <div key={item.id} className="flex gap-3 items-center border-b border-gray-300 pb-2">
               <Image
                 src={item.imageUrl}
-                alt={item.name}
+                alt={"image de produit: "+item.name}
                 width={50}
                 height={50}
                 className="object-cover rounded"

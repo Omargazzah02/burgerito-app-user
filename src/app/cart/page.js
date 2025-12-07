@@ -91,7 +91,7 @@ export default function Page() {
                 <div className="w-20 h-20 relative rounded-lg overflow-hidden flex-shrink-0">
                   <Image
                     src={item.imageUrl}
-                    alt={item.name}
+                    alt={"image de produit :" +item.name}
                     fill
                     className="object-cover"
                   />

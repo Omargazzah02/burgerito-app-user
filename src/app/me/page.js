@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
+import Loading from "@/app/loading"; 
 
 export default function Page() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession(); 
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,28 +22,28 @@ export default function Page() {
   };
 
   useEffect(() => {
-    console.log(session)
-    if (!session) return;
+    if (status === "loading") return;
 
+    if (status === "unauthenticated" || !session) {
+      setLoading(false);
+      return;
+    }
 
     const fetchProfileAndOrders = async () => {
       try {
-        // 1️⃣ Récupérer l'utilisateur
         const resUser = await fetch("https://node-eemi.vercel.app/api/auth/me", {
           headers: { Authorization: `Bearer ${session.accessToken}` },
         });
         const dataUser = await resUser.json();
         setUser(dataUser.user);
 
-        // 2️⃣ Récupérer les commandes
         const resOrders = await fetch("https://node-eemi.vercel.app/api/orders/me", {
           headers: { Authorization: `Bearer ${session.accessToken}` },
         });
         const dataOrders = await resOrders.json();
 
-        // 3️⃣ Pour chaque order, récupérer les items
         const ordersWithItems = await Promise.all(
-          dataOrders.items.map(async (order) => {
+          (dataOrders.items || []).map(async (order) => {
             const resOrderDetail = await fetch(
               `https://node-eemi.vercel.app/api/orders/${order.id}`,
               {
@@ -58,34 +59,43 @@ export default function Page() {
         );
 
         setOrders(ordersWithItems);
-        setLoading(false);
       } catch (error) {
         console.error("Erreur récupération profil ou commandes :", error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchProfileAndOrders();
-  }, [session]);
+  }, [session, status]);
 
-  if (loading) return <p>Chargement...</p>;
-  if (!user) return null;
+  if (loading || status === "loading") {
+    return <Loading />;
+  }
+
+  if (!user) {
+    return (
+      <div className="p-8 text-center text-white">
+        <p>Veuillez vous connecter pour accéder à votre profil.</p>
+        <Link href="/" className="underline mt-4 inline-block">
+          Retour à l'accueil
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <section className="flex flex-col gap-5 p-4 md:p-6 lg:p-8">
-      
-       <Link href="/" className="text-[var(--gray-light-color)] flex  gap-2 items-center" >
-        
-          <Image
-      src={"/images/lets-icons_back.png"}
-      width={30}
-      height={30}
-      ></Image>
+      <Link href="/" className="text-[var(--gray-light-color)] flex gap-2 items-center">
+        <Image
+          src={"/images/lets-icons_back.png"}
+          width={30}
+          height={30}
+          alt="Retour"
+        />
         Retour à l’accueil
-
       </Link>
 
-    
       <h1 className="big--title">{user.name}</h1>
 
       <div className="flex flex-col gap-10">
@@ -94,7 +104,7 @@ export default function Page() {
             <p className="text--white">{formatDate(order.createdAt)}</p>
 
             <div className="flex flex-wrap gap-4">
-              {order.items.map((item) => (
+              {order.items?.map((item) => (
                 <div
                   key={item.id}
                   className="p-5 arounded-gray flex gap-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4"

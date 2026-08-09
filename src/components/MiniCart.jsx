@@ -71,9 +71,6 @@ export default function MiniCart() {
             <Link href="/cart" className="button--gray text-center w-full">
               Voir le panier
             </Link>
-            <Link href="/checkout" className="button--orange text-center w-full">
-              Passer à la commande
-            </Link>
           </div>
         </div>
       )}

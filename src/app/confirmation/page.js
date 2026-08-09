@@ -12,7 +12,7 @@ export default function page () {
 
                     <p className=" text--white text-3xl font-bold">Votre commande est en cuisson</p>
 
-                    <Link href="/" className=" button--orange"> Retour à l’accueil</Link>
+                    <Link href="/me" className=" button--orange"> Consulter l’historique de vos commandes</Link>
 
 
 
